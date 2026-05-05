@@ -1,4 +1,4 @@
-# TCP Mini-TP
+# TCP TP
 
 A production-grade TCP command channel written in Go.
 
