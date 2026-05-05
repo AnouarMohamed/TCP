@@ -37,6 +37,18 @@ var (
 	sleepFn                = time.Sleep
 )
 
+var sonicBanner = []string{
+	"          .,",
+	".      _,'f----.._",
+	"|\\ ,-'\"/  |     ,'",
+	"|,_  ,--.      /",
+	"/,-. ,'`.     (_",
+	"f  o|  o|__     \"`-.",
+	",-._.,--'_ `.   _.,-`",
+	"`\"' ___.,'` j,-'",
+	"  `-.__.,--'",
+}
+
 var logger = slog.New(slog.NewJSONHandler(os.Stdout, nil)).With("component", "client")
 
 func connectAndServe(serverAddr, token string, certPEM []byte, allowed map[string]struct{}, maxRetries int) error {
@@ -71,6 +83,8 @@ func runClientSession(serverAddr, token string, certPEM []byte, allowed map[stri
 		return err
 	}
 
+	printSonicBanner()
+
 	conn, err := tls.Dial("tcp", serverAddr, tlsConfig)
 	if err != nil {
 		return err
@@ -96,6 +110,14 @@ func runClientSession(serverAddr, token string, certPEM []byte, allowed map[stri
 		return err
 	}
 	return nil
+}
+
+func printSonicBanner() {
+	fmt.Println("+----------------------------------------------+")
+	for _, line := range sonicBanner {
+		fmt.Printf("|%-44s|\n", line)
+	}
+	fmt.Println("+----------------------------------------------+")
 }
 
 func buildTLSConfig(serverAddr string, certPEM []byte) (*tls.Config, error) {
