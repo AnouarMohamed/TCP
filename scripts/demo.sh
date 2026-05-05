@@ -4,6 +4,10 @@ set -euo pipefail
 # Lightweight demo script for local testing.
 # Usage: PORT=:9898 TOKEN=s3cr3t MODE=2 ./scripts/demo.sh
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+cd "$REPO_ROOT"
+
 PORT="${PORT:-:9898}"
 TOKEN="${TOKEN:-s3cr3t}"
 MODE="${MODE:-2}"

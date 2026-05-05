@@ -23,6 +23,15 @@ const (
 	serverHeartbeatTimeout  = 5 * time.Second
 )
 
+var sonicBanner = []string{
+	"   _____             _        _   _          ",
+	"  / ____|           (_)      | | (_)         ",
+	" | (___   ___  _ __  _  ___  | |_ _  ___     ",
+	"  \\___ \\ / _ \\| '_ \\| |/ __| | __| |/ __|    ",
+	"  ____) | (_) | | | | | (__  | |_| | (__     ",
+	" |_____/ \\___/|_| |_|_|\\___|  \\__|_|\\___|    ",
+}
+
 type sessionMode string
 
 const (
@@ -177,11 +186,9 @@ func modePrompt(mode sessionMode) string {
 
 func selectSessionMode(scanner *bufio.Scanner, target string) sessionMode {
 	fmt.Println("+------------------------------------------------+")
-	fmt.Println("|      __  __ _       _   _ _                    |")
-	fmt.Println("|     |  \\/  (_)_ __ | |_| (_)_ __   ___        |")
-	fmt.Println("|     | |\\/| | | '_ \\| __| | '_ \\ / _ \\      |")
-	fmt.Println("|     | |  | | | | | | |_| | | | | |  __/       |")
-	fmt.Println("|     |_|  |_|_|_| |_|\\__|_|_| |_|\\___|    |")
+	for _, line := range sonicBanner {
+		fmt.Printf("|%s|\n", line)
+	}
 	fmt.Println("+------------------------------------------------+")
 	fmt.Printf("choose mode for %s\n", target)
 	fmt.Println("  1) chat mode   - type free-form messages")
